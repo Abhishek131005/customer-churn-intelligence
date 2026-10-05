@@ -1,6 +1,10 @@
 import streamlit as st
 
-from src.models.predict import predict_churn
+from app.services.api_client import (
+    predict_customer,
+    check_api_health
+)
+
 from app.components.styles import load_css, page_header
 
 
@@ -11,6 +15,13 @@ page_header(
     "Customer Risk Assessment",
     "Evaluate an individual customer's churn probability and financial exposure."
 )
+if check_api_health():
+    st.caption("● Prediction service online")
+else:
+    st.warning(
+        "Prediction API is offline. "
+        "Start the FastAPI service before making predictions."
+    )
 st.markdown("### Customer Profile")
 
 c1, c2, c3, c4 = st.columns(4)
@@ -178,7 +189,15 @@ if st.button(
     use_container_width=True
 ):
 
-    result = predict_churn(customer)
+    try:
+        result = predict_customer(customer)
+
+    except Exception:
+        st.error(
+            "Prediction service is currently unavailable. "
+            "Please try again shortly."
+        )
+        st.stop()   
 
     probability = (
         result["churn_probability"] * 100

@@ -1,7 +1,7 @@
 from src.models.predict import predict_churn
 
 
-customer = {
+CUSTOMER = {
     "gender": "Female",
     "SeniorCitizen": 0,
     "Partner": "Yes",
@@ -24,6 +24,18 @@ customer = {
 }
 
 
-result = predict_churn(customer)
+def test_prediction_output():
 
-print(result)
+    result = predict_churn(CUSTOMER)
+
+    assert 0 <= result["churn_probability"] <= 1
+
+    assert result["risk_level"] in {
+        "Low",
+        "Medium",
+        "High"
+    }
+
+    assert result["prediction"] in {0, 1}
+
+    assert result["monthly_revenue_at_risk"] >= 0
