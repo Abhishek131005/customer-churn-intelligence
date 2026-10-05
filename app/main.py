@@ -1,12 +1,14 @@
 from pathlib import Path
 import sys
 
+import streamlit as st
+
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-import streamlit as st
 
 from app.components.styles import load_css
 
@@ -15,75 +17,193 @@ st.set_page_config(
     page_title="Churn Intelligence",
     page_icon="◈",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
+
 
 load_css()
 
 
-st.markdown("# Customer Churn Intelligence")
+# --------------------------------------------------
+# Sidebar branding
+# --------------------------------------------------
 
-st.markdown("""
-<div class="subtitle">
-Machine-learning powered customer retention and revenue-risk intelligence.
-</div>
-""", unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown("## ◈ Churn Intelligence")
+
+    st.caption(
+        "ML-powered customer retention platform"
+    )
+
+    st.markdown("---")
+
+    st.markdown(
+        """
+        **Production Model**  
+        Logistic Regression
+        """
+    )
+
+    st.markdown(
+        """
+        **System**  
+        Streamlit + FastAPI
+        """
+    )
+
+    st.markdown(
+        """
+        **Status**  
+        🟢 Operational
+        """
+    )
+
+    st.markdown("---")
+
+    st.caption(
+        "Customer Churn & Revenue Intelligence Platform"
+    )
 
 
-st.markdown("""
-### Turn churn predictions into retention decisions
+# --------------------------------------------------
+# Hero
+# --------------------------------------------------
 
-This platform combines customer analytics, machine learning and
-revenue-risk modelling to help identify customers most likely to leave
-and prioritize retention efforts.
-""")
+st.markdown(
+    "# Customer Churn Intelligence"
+)
 
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">PREDICT</div>
-        <div class="metric-value">Churn Risk</div>
-        <div class="metric-caption">
-        Estimate customer-level churn probability.
-        </div>
+st.markdown(
+    """
+    <div class="subtitle">
+    Predict churn. Understand customer risk. Protect recurring revenue.
     </div>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+)
 
-with col2:
-    st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">UNDERSTAND</div>
-        <div class="metric-value">Risk Drivers</div>
-        <div class="metric-caption">
-        Understand factors influencing customer churn.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
-with col3:
-    st.markdown("""
-    <div class="metric-card">
-        <div class="metric-label">PRIORITIZE</div>
-        <div class="metric-value">Revenue</div>
-        <div class="metric-caption">
-        Identify customers representing the greatest revenue risk.
+st.markdown(
+    """
+    This platform combines **customer analytics, machine learning,
+    explainable predictions and revenue-risk modeling** to help
+    retention teams identify customers most likely to leave and
+    prioritize intervention.
+    """
+)
+
+
+st.markdown("")
+
+
+# --------------------------------------------------
+# Product capabilities
+# --------------------------------------------------
+
+c1, c2, c3 = st.columns(3)
+
+
+with c1:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-label">PREDICT</div>
+            <div class="metric-value">Churn Risk</div>
+            <div class="metric-caption">
+                Estimate customer-level churn probability
+                using the production ML pipeline.
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+with c2:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-label">UNDERSTAND</div>
+            <div class="metric-value">Risk Drivers</div>
+            <div class="metric-caption">
+                Explore customer behaviors and model factors
+                associated with churn.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+with c3:
+    st.markdown(
+        """
+        <div class="metric-card">
+            <div class="metric-label">PRIORITIZE</div>
+            <div class="metric-value">Revenue</div>
+            <div class="metric-caption">
+                Rank customers using churn probability
+                and expected revenue exposure.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 st.markdown("---")
 
-st.markdown("### Explore the platform")
 
-st.markdown("""
-Use the navigation menu to explore:
+# --------------------------------------------------
+# Navigation explanation
+# --------------------------------------------------
 
-- **Overview** — executive-level customer and churn KPIs
-- **Analytics** — explore behavioral churn patterns
-- **Risk Center** — identify and prioritize high-risk customers
-- **Prediction** — analyze an individual customer
-- **Model Intelligence** — inspect model performance and drivers
-""")
+st.markdown("## Explore the Platform")
+
+
+left, right = st.columns(2)
+
+
+with left:
+    st.markdown(
+        """
+        ### Executive Intelligence
+
+        **Overview**  
+        Monitor churn KPIs, revenue exposure and customer
+        lifecycle patterns.
+
+        **Analytics**  
+        Explore churn across contracts, services, payment
+        methods and customer behavior.
+
+        **Risk Center**  
+        Identify high-risk customers and export prioritized
+        retention lists.
+        """
+    )
+
+
+with right:
+    st.markdown(
+        """
+        ### Machine Learning
+
+        **Prediction**  
+        Analyze an individual customer using the deployed
+        prediction API.
+
+        **Model Intelligence**  
+        Inspect model performance, decision thresholds and
+        the strongest drivers of churn.
+        """
+    )
+
+
+st.markdown("---")
+
+
+st.caption(
+    "Built with Python · Scikit-learn · FastAPI · "
+    "Streamlit · Plotly"
+)

@@ -2,109 +2,121 @@ import streamlit as st
 
 
 def load_css():
-    st.markdown("""
-    <style>
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background-color: #0b1120;
+        }
 
-    /* Main page */
-    .stApp {
-        background: #0b1120;
-    }
+        .block-container {
+            max-width: 1400px;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
 
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        max-width: 1400px;
-    }
+        h1, h2, h3 {
+            letter-spacing: -0.025em;
+        }
 
-    /* Headings */
-    h1, h2, h3 {
-        letter-spacing: -0.02em;
-    }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-top: -12px;
+            margin-bottom: 30px;
+        }
 
-    /* Hero subtitle */
-    .subtitle {
-        color: #94a3b8;
-        font-size: 1.05rem;
-        margin-top: -12px;
-        margin-bottom: 28px;
-    }
+        .metric-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 22px;
+            min-height: 130px;
+        }
 
-    /* KPI card */
-    .metric-card {
-        background: #111827;
-        border: 1px solid #1f2937;
-        border-radius: 14px;
-        padding: 22px;
-        min-height: 125px;
-    }
+        .metric-label {
+            color: #94a3b8;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
 
-    .metric-label {
-        color: #94a3b8;
-        font-size: 0.85rem;
-        margin-bottom: 8px;
-    }
+        .metric-value {
+            color: #f8fafc;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 7px;
+        }
 
-    .metric-value {
-        color: #f8fafc;
-        font-size: 2rem;
-        font-weight: 700;
-    }
+        .metric-caption {
+            color: #64748b;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
 
-    .metric-caption {
-        color: #64748b;
-        font-size: 0.78rem;
-        margin-top: 5px;
-    }
+        .insight-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 20px;
+            min-height: 145px;
+        }
 
-    /* Insight boxes */
-    .insight-card {
-        background: #111827;
-        border: 1px solid #1f2937;
-        border-radius: 12px;
-        padding: 18px;
-        margin-bottom: 12px;
-    }
+        .risk-high {
+            background: rgba(239, 68, 68, 0.10);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            padding: 20px;
+            border-radius: 12px;
+        }
 
-    /* High risk */
-    .risk-high {
-        background: rgba(239,68,68,0.12);
-        border: 1px solid rgba(239,68,68,0.35);
-        padding: 18px;
-        border-radius: 12px;
-    }
+        .risk-medium {
+            background: rgba(245, 158, 11, 0.10);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            padding: 20px;
+            border-radius: 12px;
+        }
 
-    /* Medium risk */
-    .risk-medium {
-        background: rgba(245,158,11,0.12);
-        border: 1px solid rgba(245,158,11,0.35);
-        padding: 18px;
-        border-radius: 12px;
-    }
+        .risk-low {
+            background: rgba(34, 197, 94, 0.10);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            padding: 20px;
+            border-radius: 12px;
+        }
 
-    /* Low risk */
-    .risk-low {
-        background: rgba(34,197,94,0.12);
-        border: 1px solid rgba(34,197,94,0.35);
-        padding: 18px;
-        border-radius: 12px;
-    }
+        [data-testid="stMetric"] {
+            background: #111827;
+            border: 1px solid #1f2937;
+            padding: 18px;
+            border-radius: 14px;
+        }
 
-    /* Streamlit metrics */
-    [data-testid="stMetric"] {
-        background: #111827;
-        border: 1px solid #1f2937;
-        padding: 16px;
-        border-radius: 12px;
-    }
+        [data-testid="stSidebar"] {
+            background-color: #080d18;
+            border-right: 1px solid #1f2937;
+        }
 
-    /* Sidebar */
-    [data-testid="stSidebar"] {
-        background: #080d18;
-        border-right: 1px solid #1f2937;
-    }
+        .stButton > button {
+            border-radius: 10px;
+            font-weight: 600;
+        }
 
-    </style>
-    """, unsafe_allow_html=True)
+        div[data-testid="stDataFrame"] {
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        hr {
+            border-color: #1f2937;
+        }
+
+        footer {
+            visibility: hidden;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def page_header(title, description):
@@ -112,7 +124,7 @@ def page_header(title, description):
 
     st.markdown(
         f'<p class="subtitle">{description}</p>',
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
 
@@ -125,5 +137,5 @@ def metric_card(label, value, caption=""):
             <div class="metric-caption">{caption}</div>
         </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
