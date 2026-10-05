@@ -13,7 +13,7 @@ from sklearn.metrics import (
     roc_auc_score
 )
 
-from xgboost import XGBClassifier
+from sklearn.linear_model import LogisticRegression
 
 from src.data.preprocess import build_preprocessor
 
@@ -85,12 +85,10 @@ preprocessor = build_preprocessor(X_train)
 # Model
 # --------------------------------------------------
 
-classifier = XGBClassifier(
-    n_estimators=300,
-    learning_rate=0.05,
-    max_depth=4,
-    random_state=42,
-    eval_metric="logloss"
+classifier = LogisticRegression(
+    max_iter=1000,
+    class_weight="balanced",
+    random_state=42
 )
 
 

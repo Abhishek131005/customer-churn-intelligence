@@ -28,41 +28,30 @@ def get_risk_level(probability):
 
 
 def predict_churn(customer_data, threshold=0.40):
-    """
-    Predict churn risk for one customer.
+    customer_df = pd.DataFrame([customer_data])
 
-    customer_data should be a dictionary containing
-    the same features used during model training.
-    """
-
-    customer_df = pd.DataFrame(
-        [customer_data]
+    probability = float(
+        model.predict_proba(customer_df)[0, 1]
     )
 
-    probability = model.predict_proba(
-        customer_df
-    )[0, 1]
+    prediction = int(probability >= threshold)
 
-    prediction = int(
-        probability >= threshold
+    monthly_charges = float(
+        customer_data["MonthlyCharges"]
     )
 
     revenue_at_risk = (
-        probability
-        * customer_data["MonthlyCharges"]
+        probability * monthly_charges
     )
 
     return {
-        "churn_prediction": prediction,
-        "churn_probability": round(
-            float(probability),
-            4
+        "prediction": prediction,
+        "prediction_label": (
+            "Likely to Churn"
+            if prediction == 1
+            else "Likely to Stay"
         ),
-        "risk_level": get_risk_level(
-            probability
-        ),
-        "monthly_revenue_at_risk": round(
-            float(revenue_at_risk),
-            2
-        )
+        "churn_probability": round(probability, 4),
+        "risk_level": get_risk_level(probability),
+        "monthly_revenue_at_risk": round(revenue_at_risk, 2)
     }
