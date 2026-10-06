@@ -70,14 +70,6 @@ Customer attributes are sent to the deployed FastAPI service, which returns the 
   <img src="assets/prediction.png" width="95%" alt="Individual Churn Prediction">
 </p>
 
-### Model Intelligence
-
-The dashboard also exposes model performance, threshold information, and the strongest Logistic Regression coefficients influencing churn predictions.
-
-<p align="center">
-  <img src="assets/model-intelligence.png" width="95%" alt="Model Intelligence">
-</p>
-
 ---
 
 ## System Architecture
